@@ -97,11 +97,12 @@
             </button>
           </div>
            <div class="modal-body">
-                <form method="POST" action = "{% url 'mark_submission_request' submission_id=1 teacher_id=0 %}" class="cclass_form" id="mark_assignment_form">
+                <form method="POST" action = "{% url 'mark_submission_request' submission_id=submission.id  teacher_id=0 %}" class="cclass_form" id="mark_assignment_form">
                   {% csrf_token %}
                   <div class="form-group">
                     <input type="number" class="form-control" id="submission_marks" name="submission_marks" placeholder="Submission Marks">
                     <input type="hidden" id="assignmentid" name="assignmentid" >
+                    <input type="hidden" id="submissionid" name="submissionid" >
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form> 
@@ -130,6 +131,10 @@
         var assignment1 = document.getElementById('assignmentid');
         console.log(assignment_id);
         assignment1.value = assignment_id;
+
+        var submission1 = document.getElementById('submissionid');
+        console.log(submission_id);
+        submission1.value = submission_id;
 
     });
 

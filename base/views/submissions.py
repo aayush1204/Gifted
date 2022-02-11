@@ -42,11 +42,13 @@ def mark_submission_request(request,submission_id,teacher_id):
     if request.method == "POST":
         marks = request.POST['submission_marks']
         assignment_id = request.POST['assignmentid']
+        submission_id2 = request.POST['submissionid'] 
         print(assignment_id)
         print(marks)
         print('marks submision')
+        print(submission_id2)
         print(submission_id)
-        submission = Submissions.objects.get(pk=submission_id)
+        submission = Submissions.objects.get(pk=submission_id2)
         submission.marks_alloted = marks
         submission.save()
         # email.submission_marks_mail(submission_id,teacher_id,marks)
