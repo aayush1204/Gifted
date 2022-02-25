@@ -27,6 +27,8 @@ def delete_class(request,classroom_id):
 @login_required(login_url='login')
 @access_class('home')
 def render_class(request,id):
+    print(id)
+    print('abs')
     classroom = Classrooms.objects.get(pk=id)
     try: 
         assignments = Assignments.objects.filter(classroom_id = id)

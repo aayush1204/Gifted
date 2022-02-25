@@ -35,6 +35,14 @@
                 <h6 class="card-subtitle mb-2 text-muted">Not Turned In </h6>
                 {% endif %}
                 <a  href="{% get_media_prefix %}{{ assignment.instruction_file }}" download> Download instruction file </a>
+              
+                {% if turned_in == '1' %}
+                <form action="{% url 'del_sub' id=1 assignment_id=assignment.id %}" method="POST" id="del_sub_form" >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary">Delete Submission</button>
+                </form> 
+                {% endif %}
+                
               </div>
                 </div>
                 </a>
@@ -80,8 +88,10 @@
                 <h6 class="card-subtitle mb-2 text-muted">Instructions -  {{ assignment.instructions }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">Assignment posted on {{ assignment.posted_date }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">Assignment due at {{ assignment.due_time }} on {{ assignment.due_date }}</h6>
-                
+               
                 <a  href="{% get_media_prefix %}{{ assignment.instruction_file }}" download> Download instruction file </a>
+
+                
               </div>
                 </div>
                 </a>

@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from .views import home,auth,classs,assignments,submissions
+from .views import home,auth,classs,assignments,submissions, payment
 
 urlpatterns = [
     path('',home.landing_page,name='landing_page'),
@@ -11,7 +11,10 @@ urlpatterns = [
     path('register/',auth.register_view,name='register'),
     path('logout/', auth.logout_view,name='logout'),
     path('home/',home.home,name='home'),
+    path('payment/', payment.homepage, name='payhome'),
+    path('paymenthandler/', payment.paymenthandler, name='paymenthandler'),
     path('class/<int:id>',classs.render_class,name='render_class'),
+    path('class/<int:id>/delete_assignment/<int:assignment_id>',submissions.delete_submission,name='del_sub'),
     path('create_assignment/<int:classroom_id>',assignments.create_assignment,name='create_assignment'),
     path('assignment_summary/<int:assignment_id>',assignments.assignment_summary,name='assignment_summary'),
     path('delete_assignment/<int:assignment_id>',assignments.delete_assignment,name='delete_assignment'),

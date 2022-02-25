@@ -64,3 +64,74 @@ def mark_submission_request(request,submission_id,teacher_id):
         no_of_students = Students.objects.filter(classroom_id=assignment.classroom_id)
         mappings = chain(teacher_mapping,student_mapping)
         return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings,'no_of_students':no_of_students})
+
+
+def delete_submission(request,id,assignment_id):
+    if request.method == "POST":
+        student = Students.objects.get(student_id=request.user)
+        Submissions.objects.get(student_id=student, assignment_id = assignment_id).delete()
+        
+        print('inside delete')
+       
+        id = 1
+        classroom = Classrooms.objects.get(pk=id)
+        try: 
+            assignments = Assignments.objects.filter(classroom_id = id)
+        except Exception as e:
+            assignments = None
+
+        try:
+            students = Students.objects.filter(classroom_id = id)
+        except Exception as e:
+            students = None
+        
+        try:
+            announcements = Announcements.objects.filter(classroom_id = id)
+        except Exception as e:
+            announcements = None
+
+        try :
+            student = Students.objects.get(student_id=request.user)
+        except Exception as e:
+            student = None
+
+        if student is not None:
+            try:
+                submissions = Submissions.objects.filter(student_id=request.user)
+            except Exception as e:
+                submissions = None
+
+            turned_in = []
+
+            is_student = 1
+            # print(student)
+            for i in assignments:
+                # try:
+                # print(i.id)
+                # print('123')
+                # print(i)
+                # print(student)
+                submission = Submissions.objects.filter(student_id=student, assignment_id = i)
+                # print(submission)
+                # except Exception as e:
+                #     submission = None
+                
+                if (submission.exists()):
+                    turned_in.append((i, '1'))
+                else:
+                    turned_in.append((i, '0'))   
+
+            # print(turned_in)             
+            teachers = Teachers.objects.filter(classroom_id = id)
+            teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
+            student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+            mappings = chain(teacher_mapping,student_mapping) 
+            return render(request,'base/class_page.html',{'announcements':announcements,'classroom':classroom,'assignments':turned_in ,'students':students,'teachers':teachers,"mappings":mappings,"is_student":is_student})
+
+        else:
+            teachers = Teachers.objects.filter(classroom_id = id)
+            teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
+            student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+            mappings = chain(teacher_mapping,student_mapping) 
+            is_student = 0
+            return render(request,'base/class_page.html',{'announcements':announcements,'classroom':classroom,'assignments':assignments ,'students':students,'teachers':teachers,"mappings":mappings,"is_student":is_student})
