@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from ..decorators import login_excluded
 from ..forms import UserAuthenticationForm,UserRegisterationForm
-
+from ..models import Students,Teachers
 from itertools import chain
 
 @login_excluded('home')
@@ -15,7 +15,7 @@ def register_view(request):
             user=form.save()
             user_name=form.cleaned_data.get('username')
             login(request,user)
-            return redirect('home')
+            return redirect('paymenthome')
         else:
             return render(request,'base/register.html',{'form':form})
     form=UserRegisterationForm()
@@ -34,7 +34,19 @@ def login_view(request):
             user=authenticate(username=user_name,password=password)
             if user!=None:
                 login(request,user)
-                return redirect('home')
+                try :
+                    student = Students.objects.get(student_id = request.user)
+                    subscribed = student.student_id.is_subscribed
+                    freetrial = student.student_id.is_free_trial
+                    
+                except Exception as e:
+                    subscribed = True
+                    freetrial = False
+                    
+                if (not subscribed and not freetrial) :
+                    return redirect('paymenthome')
+                else:    
+                    return redirect('home')
         else:
             return render(request,'base/login.html',{'form':form})
     form=UserAuthenticationForm() 
