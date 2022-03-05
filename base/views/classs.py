@@ -125,3 +125,7 @@ def join_class_request(request):
         student = Students(student_id = request.user, classroom_id = classroom)
         student.save()
         return JsonResponse({'status':'SUCCESS'})
+
+@login_required(login_url='login')
+def videos(request):
+    return render(request, 'base/videos.html')
