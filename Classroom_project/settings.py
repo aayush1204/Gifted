@@ -153,11 +153,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='aayushhalgekar0@gmail.com'
-EMAIL_HOST_PASSWORD='lkiqolzwwzgjmwmp'
-EMAIL_PORT='587'
-
-RAZOR_KEY_ID = 'rzp_test_hshegVTXwyFOHF'
-
-RAZOR_KEY_SECRET = 'JSrSuPX38HglgYgIzk7NzXvX'
