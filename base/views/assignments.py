@@ -30,7 +30,7 @@ def create_assignment(request,classroom_id):
             instruction_file = request.FILES['instruction_file']
             assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instruction_file = instruction_file, due_time=due_time,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
             assignment.save()
-            # email.assignment_post_mail(classroom_id,assignment.id)
+            email.assignment_post_mail(classroom_id,assignment.id)
             return redirect('render_class',id=classroom_id.id)
         else:
             print(3)

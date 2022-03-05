@@ -1,6 +1,6 @@
 from django.core.mail import send_mail
 from Classroom_project.settings import EMAIL_HOST_USER
-from .models import Submissions,Assignments,Classrooms,Students,CustomUser
+from .models import Submissions,Assignments,Classrooms,Students,CustomUser, Teachers
 from datetime import datetime 
 
 def send_email(subject,recipient,message):
@@ -9,8 +9,8 @@ def send_email(subject,recipient,message):
     elif isinstance(recipient,list):
         send_mail(subject,message,EMAIL_HOST_USER,recipient_list = recipient,fail_silently = False)
 
-def submission_marks_mail(submission_id,teacher_id,marks):
-    teacher_name = CustomUser.objects.get(pk=teacher_id).username
+def submission_marks_mail(submission_id,teacher_name,marks):
+    # teacher_name = CustomUser.objects.get(pk=teacher_id).username
     submission = Submissions.objects.get(pk=submission_id)
     assignment_name = submission.assignment_id.assignment_name
     student_user = submission.student_id.student_id

@@ -80,3 +80,10 @@ class Announcements(models.Model):
     instruction_file = models.FileField(upload_to='documents', blank = True, null= True)
     posted_date=models.DateField(auto_now_add=True)
 
+# class Videos(models.Model):
+#     classroom_id=models.ForeignKey(Classrooms,on_delete=models.CASCADE)
+#     video=models.FileField(upload_to='videos', blank = True, null = True)
+#     video_name=models.CharField(max_length=50)
+
+# def __str__(self):
+#         return self.classroom_id.classroom_name

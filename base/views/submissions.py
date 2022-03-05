@@ -51,7 +51,13 @@ def mark_submission_request(request,submission_id,teacher_id):
         submission = Submissions.objects.get(pk=submission_id2)
         submission.marks_alloted = marks
         submission.save()
-        # email.submission_marks_mail(submission_id,teacher_id,marks)
+        print("teacher id")
+        teacher = Teachers.objects.get(teacher_id=request.user)
+        print(teacher.teacher_id)
+        # print(teacher.teacher_id.teacher_id)
+        print(teacher.teacher_id.username)
+        teacher_name = teacher.teacher_id.username
+        email.submission_marks_mail(submission_id,teacher_name,marks)
         # return JsonResponse({'status':'SUCCESS'})
 
         # return render HttpResponse('<h1>Dniee</h1>')
