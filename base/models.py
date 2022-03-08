@@ -59,15 +59,20 @@ class Submissions(models.Model):
 
 
 class Appointment(models.Model):
-    appointmentId = models.AutoField(primary_key= True,default = 1)
-    student_id=models.ForeignKey(Students, on_delete=models.CASCADE)
+    appointmentId = models.AutoField(primary_key= True)
+    # student_id=models.ForeignKey(Students, on_delete=models.CASCADE)
     teacher_id=models.ForeignKey(Teachers, on_delete=models.CASCADE)
-    
-    date = models.DateTimeField(default=datetime.datetime.now)
-    timing=models.DateTimeField(default=datetime.datetime.now)
+    firstname = models.CharField(max_length=250, default="None")
+    lastname = models.CharField(max_length=250, default="None")
+    appointment_link = models.CharField(max_length=250, default="None")
+    date = models.DateField()
+    timing=models.TimeField()
     isCancelled=models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
     reasonOfDisapproval = models.CharField(max_length=250, default="None")
+    start_link = models.CharField(max_length=3000, default="None")
+    zoom_id = models.CharField(max_length=20, default="None")
+    zoom_password = models.CharField(max_length=20, default="None")
     #appointmentDate=models.DateField(auto_now=True)
     #description=models.TextField(max_length=500)
     status=models.BooleanField(default=False)
@@ -80,10 +85,12 @@ class Announcements(models.Model):
     instruction_file = models.FileField(upload_to='documents', blank = True, null= True)
     posted_date=models.DateField(auto_now_add=True)
 
-# class Videos(models.Model):
-#     classroom_id=models.ForeignKey(Classrooms,on_delete=models.CASCADE)
-#     video=models.FileField(upload_to='videos', blank = True, null = True)
-#     video_name=models.CharField(max_length=50)
+class Videos(models.Model):
+    classroom_id=models.ForeignKey(Classrooms,on_delete=models.CASCADE)
+    video=models.FileField(upload_to='documents', blank = True, null = True)
+    video_name=models.CharField(max_length=50)
+    description=models.TextField()
+
 
 # def __str__(self):
 #         return self.classroom_id.classroom_name

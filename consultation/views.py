@@ -12,10 +12,14 @@ def appointment_book(request):
         date = request.POST['date']
         doctor = request.POST['doctor']
 
+        name = request.POST['firstname']
+        lastname = request.POST['lastname']
+        email = request.POST['email']
+        
+        # Appointment.objects.create()
         print(time)
         print(date)
         print(doctor)
-        student = Student.objects.filter(student_id='1')
-        teacher = Teachers.objects.filter(teacher_id = '1')
+        
         # Appointment.objects.create(student_id = student, teacher_id = teacher)
     return render(request,'student_book_appointment.html')

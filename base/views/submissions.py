@@ -60,6 +60,27 @@ def mark_submission_request(request,submission_id,teacher_id):
         email.submission_marks_mail(submission_id,teacher_name,marks)
         # return JsonResponse({'status':'SUCCESS'})
 
+        # zoom email
+        from django_zoom_meetings import ZoomMeetings
+        # Creat a JWT app your account https://marketplace.zoom.us/ and use
+        # the api_key, secret_key and your zoom email address to create a ZoomMeetings instance
+        api_key='g4Jwbl4RQf6m4mlPVa7r7g'
+        secret_key='JZZF8Ce3KXH1KvEocDVlsE08GgP0XJfvh1wR'
+        zoom_email='aayush.halgekar@gmail.com'
+        my_zoom = ZoomMeetings(api_key,secret_key,zoom_email)
+        str_topic="test meetig"
+        timenow = datetime.now()
+        date= datetime(2021,7,5,13,30)
+
+        str_meeting_duration='30'
+        str_meeting_password='12345'
+        # required parameters are date,topic,duration and the password of the meeting. In return you will get all the meeting details including the join url
+        create_meeting = my_zoom.CreateMeeting(date,str_topic,str_meeting_duration,str_meeting_password) 
+        print(create_meeting)
+        print(create_meeting['id'])
+        print(create_meeting['start_url'])
+        print(create_meeting['join_url'])
+        print(create_meeting['password'])
         # return render HttpResponse('<h1>Dniee</h1>')
         # assignment_id = 1
         assignment = Assignments.objects.filter(pk = assignment_id).first()
