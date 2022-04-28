@@ -116,13 +116,14 @@
 							  <h3 style ="text-align:center; color:black;"> Choose Doctor </h3>
 							  <div class="row">
 
+								{% for i in teachers %}
 								  <div class="col-md-4 col-lg-4 col-sm-4">
         
 									<label>
-									  <input type="radio" name="product" value="varija" class="card-input-element" />
+									  <input type="radio" name="product" value="{{i.teacher_id.username}}" class="card-input-element" />
 
 										<div class="panel panel-default card-input">
-										  <div class="panel-heading">Doctor A</div>
+										  <div class="panel-heading">{{i.teacher_id.username}}</div>
 										   <div class="member-img">
 											<!-- Image  -->
 											<img class="img-responsive" src="{% static 'gifted_site/Images/Doctor1.png'%}" alt="">
@@ -133,37 +134,37 @@
 										</div>
 									</label>       
 								  </div>
+								  {% endfor %}
 
-
-								  <div class="col-md-4 col-lg-4 col-sm-4">
+								  <!-- <div class="col-md-4 col-lg-4 col-sm-4">
         
 									<label>
 									  <input type="radio" name="product" value="varija" class="card-input-element" />
 
 										<div class="panel panel-default card-input">
 										  <div class="panel-heading">Doctor B</div>
-										   <div class="member-img">
+										   <div class="member-img"> -->
 											<!-- Image  -->
-											<img class="img-responsive" src="{% static 'gifted_site/Images/Doctor2.jpg'%}" alt="">
+											<!-- <img class="img-responsive" src="{% static 'gifted_site/Images/Doctor2.jpg'%}" alt="">
 											</div>                       
 										  <div class="panel-body">
 											<br><p style ="text-align:center">Occupational Therapist</p><p style ="text-align:center">7 years of experience</p>
 										  </div>
 										</div>
 									</label>        
-								  </div>
+								  </div> -->
 
 
-								  <div class="col-md-4 col-lg-4 col-sm-4">
+								  <!-- <div class="col-md-4 col-lg-4 col-sm-4">
         
 									<label>
 									  <input type="radio" name="product" value="varija" class="card-input-element" />
 
 										<div class="panel panel-default card-input">
 										  <div class="panel-heading">Doctor C</div>
-										   <div class="member-img">
+										   <div class="member-img"> -->
 											<!-- Image  -->
-											<img class="img-responsive" src="{% static 'gifted_site/Images/Doctor3.jpg'%}" alt="">
+											<!-- <img class="img-responsive" src="{% static 'gifted_site/Images/Doctor3.jpg'%}" alt="">
 											</div>                     
 										  <div class="panel-body">
 											<br><p style ="text-align:center">Remedial Educator</p><p style ="text-align:center">4 years of experience</p>
@@ -171,7 +172,7 @@
 										</div>
 									</label>
         
-								  </div>
+								  </div> -->
 							  </div>
 							  
 							  <h3 style ="text-align:center; color:black;"> Select the Date and Time for appointment </h3><br>

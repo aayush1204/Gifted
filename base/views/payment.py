@@ -8,6 +8,7 @@ from django.urls import reverse
 from ..models import Students,Teachers
 from datetime import timedelta
 from datetime import datetime
+from ..models import Students,Teachers, CustomUser, Videos , Appointment
 # authorize razorpay client with API Keys.
 razorpay_client = razorpay.Client(
 	auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
@@ -138,7 +139,10 @@ def paymenthandler_contactus(request):
                     # render success page on successful caputre of payment
                     # return render(request, 'base/paymentsuccess.html')
                     
-                    
+                    print(time2)
+                    print(ls[1])
+                    print('Contact us successful')
+                    print(asasa)
                     return redirect(reverse('home'))
                 except Exception as e:
                     print(e)
@@ -181,4 +185,5 @@ def paymentcontactinitiate(request):
     return render(request, 'base/gifted/paymentcontactinitiate.html', context=context)    
 @csrf_exempt
 def paymentredirect(request):
+    print(Appointment.objects.all())
     return redirect(reverse('landing_page'))

@@ -24,7 +24,7 @@ def about_us(request):
 def contact_us(request):
 
     
-    
+    teachers = Teachers.objects.all()
     start_date = datetime.now()
     # print(start_date)
     end_date = datetime.now() + timedelta(days=6)
@@ -118,7 +118,7 @@ def contact_us(request):
         return redirect(reverse('paymenthandler_contactus'))
         # student = Students.objects.get(student_id = request.user)
         
-    return render(request, 'base/gifted/contact.html', {'dates_list': final_list2} )
+    return render(request, 'base/gifted/contact.html', {'dates_list': final_list2,'teachers':teachers} )
 
 def courses(request):
     return render(request, 'base/gifted/courses.html')    
@@ -132,7 +132,7 @@ def feedback_form(request):
 def gifted_videos(request):
     videos = Videos.objects.all()
     print(videos)
-    return render(request, 'base/gifted/videos.html', {'videos':videos})    
+    return render(request, 'base/videos.html', {'videos':videos})    
 
 @login_required(login_url='login')
 def home(request):
